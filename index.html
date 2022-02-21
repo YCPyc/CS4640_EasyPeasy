@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
+    <script>
+        import RestaurantMenuIcon from '@mui/icons-material/RestaurantMenu';
+    </script>
     <head>
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
+        
         <link rel="stylesheet" href="styles/main.css">
 
         <meta charset="utf-8">
@@ -17,19 +19,26 @@
 
     </head>  
     <body>
-
         <ul>
-            <li><a href="default.asp">Home</a></li>
-            <li class="dropdown">
-                <a href="javascript:void(0)" class="dropbtn">Dropdown</a>
-                <div class="dropdown-content">
-                  <a href="#">Saved Recipe</a>
-                  <a href="#">Add Recipe</a>
-                  <a href="#">Daily Nutrient Intake</a>
+            <li>
+                <div class="logo-image">
+                    <img src="easypeasy.jpg" class="img-fluid">
                 </div>
             </li>
+            <li class="home"><a href="#home">Home</a></li>
+            <li class="dropdown">
+              <a href="javascript:void(0)" class="dropbtn">Dropdown</a>
+              <div class="dropdown-content">
+                <a href="#">Saved Recipe</a>
+                <a href="#">Add Recipe</a>
+                <a href="#">Daily Nutrient Intake</a>
+              </div>
+            </li>
             <li class="login"><a href="default.asp">Sign out</a></li>
-        </ul>
+          </ul>
+
 
     </body>
+
+
 </html>
