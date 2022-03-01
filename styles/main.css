@@ -139,13 +139,13 @@ a.navlogo {
 }
 
 #home-1 {
-	background-image: linear-gradient(#2BC8A2, white);;
+	background-image: linear-gradient(#2BC8A2, white);
 }
 
 #saved-1 {
 	width: 100%;
 	height: 100%;
-	background-image: linear-gradient(#2BC8A2, white);;
+	background-image: linear-gradient(#2BC8A2, white);
 }
 
 #searchbar {
@@ -157,6 +157,14 @@ a.navlogo {
 .center {
 	align-items: center;
   	justify-items: center;
+}
+
+.add{
+	margin:1.5rem 1rem 
+}
+
+.label--name{
+	font-weight: bold;
 }
 
 @media only screen and (min-width: 768px) {
