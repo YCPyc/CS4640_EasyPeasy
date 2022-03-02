@@ -54,7 +54,7 @@
             <form autocomplete="on">
                 <div class="add name--section">
                     <label class="label--name" for="recipe--name">Recipe Name:</label> 
-                    <input type="text" id="recipe--name" size="40" pattern="^[A-Za-z]+$">
+                    <input type="text" id="recipe--name"  pattern="^[A-Za-z]+$">
                 </div>
 
                 <div class="add ingredient--section">
@@ -62,40 +62,42 @@
 
                     <button type="button" class="btn btn-success btn-sm" id="insert-more">Add New Ingredient</button>
                      <br>
-                    <table class="table" id="mytable">
-                        <thead>
-                            <th>Amount</th>
-                            <th>Measurement</th>
-                            <th>Ingredient</th>
-                            <th>Action</th>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>
-                                    <input aria-labelledby='recipe--ingredients' type="number" >
-                                </td>
-                                <td>
-                                    <select name="measurement" aria-labelledby='recipe--ingredients'>
-                                        <option value="1">tbsp</option>
-                                        <option value="2">Cup</option>
-                                    </select>
-                                </td>
-                                <td>
-                                    <input list="ingredients" aria-labelledby='recipe--ingredients'>
-                                    <datalist id="ingredients">
-                                        <option value="Egg">
-                                        <option value="Tomato">
-                                        <option value="Cheese">
-                                        <option value="Cabbage">
-                                        <option value="Onions">
-                                    </datalist>
-                                </td>
-                                <td>
-                                    <button type="button" class="btn btn-danger btn-sm">Remove</button>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+                     <div class="table-responsive">
+                        <table class="table" id="mytable">
+                            <thead>
+                                <th>Amount</th>
+                                <th>Measurement</th>
+                                <th>Ingredient</th>
+                                <th>Action</th>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <input aria-labelledby='recipe--ingredients' type="number" >
+                                    </td>
+                                    <td>
+                                        <select name="measurement" aria-labelledby='recipe--ingredients'>
+                                            <option value="1">tbsp</option>
+                                            <option value="2">Cup</option>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <input list="ingredients" aria-labelledby='recipe--ingredients'>
+                                        <datalist id="ingredients">
+                                            <option value="Egg">
+                                            <option value="Tomato">
+                                            <option value="Cheese">
+                                            <option value="Cabbage">
+                                            <option value="Onions">
+                                        </datalist>
+                                    </td>
+                                    <td>
+                                        <button type="button" class="btn btn-danger btn-sm">Remove</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                     </div>    
                 </div>
 
                 <div class="add instuctions--section">

@@ -162,8 +162,9 @@ a.navlogo {
 		border-color: white;
 		
 	}
-
-
+	#recipe--name{
+		size:40
+	}
 
 
 }
@@ -178,6 +179,10 @@ a.navlogo {
 
 	button.navbutton {
 		color: white
+	}
+
+	#recipe--name{
+		size:50%
 	}
 
 }
