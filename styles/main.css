@@ -1,3 +1,5 @@
+/* Jun Song Park, Yan Cheng Pan */
+
 * {
 	box-sizing: border-box;
 }
@@ -23,33 +25,23 @@ div > img {
 }
   
 div#carousel {
-	grid-row: 1 / 2;
-	grid-column: 1 / 8;
 	width: 100vw;
 	height: 200px;
 	align-items: center;
 	justify-content: center;
 	overflow: hidden;
-	transform-style: preserve-3d;
-	perspective: 600px;
 	--items: 5;
 	--middle: 3;
 	--position: 1;
-	pointer-events: none;
 	
 }
   
 div.item {
 	position: absolute;
-	width: 350px;
+	width: 250px;
 	height: 200px;
-	background-color: coral;
 	--r: calc(var(--position) - var(--offset));
-	--abs: max(calc(var(--r) * -1), var(--r));
-	transition: all 0.25s linear;
-	transform: rotateY(calc(-5deg * var(--r)))
-	  translateX(calc(-300px * var(--r)));
-	z-index: calc((var(--position) - var(--abs)));
+	transform: translateX(calc(-275px * var(--r)));
 	box-shadow: 5px 10px 8px #2BC8A2;
 
 }
@@ -58,48 +50,28 @@ div.item:nth-of-type(1) {
 	--offset: 1;
 	background-image: url(https://upload.wikimedia.org/wikipedia/commons/a/a3/Eq_it-na_pizza-margherita_sep2005_sml.jpg);
 	background-size: cover;
-	background-color: #90f1ef;
 }
 div.item:nth-of-type(2) {
 	--offset: 2;
 	background-image: url(https://i2.wp.com/www.downshiftology.com/wp-content/uploads/2018/04/Carne-Asada-Tacos-main-3.jpg);
 	background-size: cover;
-	background-color: #ff70a6;
 }
 div.item:nth-of-type(3) {
 	--offset: 3;
 	background-image: url(https://christieathome.com/wp-content/uploads/2020/10/Chinese-Tomato-Egg-Stirfry-18-1-scaled.jpg);
 	background-size: cover;
-	background-color: #ff9770;
 }
 div.item:nth-of-type(4) {
 	--offset: 4;
 	background-image: url(https://www.acouplecooks.com/wp-content/uploads/2019/05/Chopped-Salad-001_1.jpg);
 	background-size: cover;
-	background-color: #ffd670;
 }
 div.item:nth-of-type(5) {
 	--offset: 5;
 	background-image: url(https://www.cookerru.com/wp-content/uploads/2020/11/doenjang-jjigae-feature-1-web-500x500.jpg);
 	background-size: cover;
-	background-color: #e9ff70;
 }
 
-
-  /* Unordered list with custom numbers style */
-ol.custom-numbers {
-    list-style: none;
-}
-
-ol.custom-numbers li {
-    counter-increment: my-awesome-counter;
-}
-
-ol.custom-numbers li::before {
-    content: counter(my-awesome-counter) ". ";
-    color: #2b90d9;
-    font-weight: bold;
-}
 
 
 
