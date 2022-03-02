@@ -30,7 +30,7 @@ div#carousel {
 	align-items: center;
 	justify-content: center;
 	overflow: hidden;
-	--items: 5;
+	--items: 4;
 	--middle: 3;
 	--position: 1;
 	
@@ -64,11 +64,6 @@ div.item:nth-of-type(3) {
 div.item:nth-of-type(4) {
 	--offset: 4;
 	background-image: url(https://www.acouplecooks.com/wp-content/uploads/2019/05/Chopped-Salad-001_1.jpg);
-	background-size: cover;
-}
-div.item:nth-of-type(5) {
-	--offset: 5;
-	background-image: url(https://www.cookerru.com/wp-content/uploads/2020/11/doenjang-jjigae-feature-1-web-500x500.jpg);
 	background-size: cover;
 }
 
