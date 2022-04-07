@@ -1,5 +1,4 @@
-<!-- GOOGLE CLOUD: https://storage.googleapis.com/easypeasyyj/index.html -->
-<!-- CS Server: https://cs4640.cs.virginia.edu/jp6ax/EasyPeasy/index.html -->
+<!-- CS Server: https://cs4640.cs.virginia.edu/yp9ar/Easypeasy/ -->
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -22,7 +21,7 @@
         
         <nav class="navbar navbar-expand-lg">
             <div class="container-xl">
-                <a class="navlogo" href="index.html">EasyPeasy</a>
+                <a class="navlogo" href="?command=mainPage">EasyPeasy</a>
                 <button class=" navbutton navbar-toggler" type="button" data-bs-toggle="collapse" 
                 data-bs-target="#navbarsTop" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon">...</span>
@@ -31,20 +30,32 @@
                 <div class="collapse navbar-collapse" id="navbarsTop">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="navbutton" aria-current="page" href="./index.html">Home</a>
+                            <a class="navbutton" aria-current="page" href="?command=mainPage">Home</a>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="navbutton dropdown-toggle" href="#" id="dropdown1" data-bs-toggle="dropdown" 
                             aria-expanded="false">Dashboard</a>
                             <ul class="dropdown-menu" aria-labelledby="dropdown1">
-                                <li><a class="dropdown-item" href="./saved.html">Saved Recipe</a></li>
-                                <li><a class="dropdown-item" href="./addPage.html">Add Recipe</a></li>
+                                <li><a class="dropdown-item" href="?command=saved">Saved Recipe</a></li>
+                                <li><a class="dropdown-item" href=".?command=add">Add Recipe</a></li>
                                 <li><a class="dropdown-item" href="#">Daily Nutrient Intake</a></li>
                             </ul>
                         </li>
                     </ul>
-                    <a style="color: white; border-color: white;" 
-                    class="btn button-border my-2 my-sm-0" aria-current="page" href="#">Log In</a>
+                    <!-- check for login status -->
+                    <?php
+                    session_start();
+                    if(isset($_SESSION["name"])){
+                        echo "<h4 style='color: white;'> Hi, ".$_SESSION["name"]."! </h4>";
+                        echo "<a style='color: white; border-color: white; margin-left: 5px' 
+                        class='btn button-border my-2 my-sm-0' aria-current='page' href='?command=logout'>Log out</a>";
+                    }
+                    else{
+                        echo "<a style='color: white; border-color: white;' 
+                        class='btn button-border my-2 my-sm-0' aria-current='page' href='?command=login'>Log in</a>";
+                    }
+                    ?>
+                    
                 </div>
             </div>
         </nav>
@@ -53,12 +64,36 @@
             <div class="container py-5">
                 <h1 class="display-5 fw-bold">Find Your Recipes</h1>
                 <p >Search and Filter through all our recipes</p>
-                <form>
-                        <input class="form-control" type="text" placeholder="Search" aria-label="Search">
+                <form method="post" action="?command=mainPage">
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" name="search" placeholder="Any food item that you want to search about" aria-label="Search" aria-describedby="button-addon2">
+                        <button class="btn btn-outline-success" type="submit" id="button-addon2">Search</button>
+                    </div>
                 </form>
             </div>
         </div>
-        
+        <!-- loop through databse to check for saved recipes -->
+        <?php
+        if(!empty($result)){
+            foreach($result as $item){
+                echo "<div class='container py-1'>";
+                echo "<div class='card shadow mb-4'>";
+                echo "<div class='card-body p-5'>";
+                echo "<h4 class='mb-4'>" .$item['food_name']."</h4>";
+                echo " <ul class='list-inline'>";
+                echo "<li class='list-inline-item'> Brand Name: ". $item['brand_name_item_name']. "</li>";
+                echo "<li class='list-inline-item'> Calories: ". $item['nf_calories']. "</li>";
+                echo "</ul>";
+                echo "</div>";
+                echo "</div>";
+                echo "</div>";
+            }
+        }
+        else{
+            echo "";
+        }
+        ?>
+
 
         <section class="fadeshow" style="padding-left: 7rem; padding-bottom: 5rem;" >
             <div class="col-4">

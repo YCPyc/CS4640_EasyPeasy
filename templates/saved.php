@@ -16,9 +16,16 @@
         integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous"> 
     </head>
     <body>
+    <!-- check for login status -->
+    <?php 
+    
+    if (!isset($_SESSION["email"])){
+      header("Location: ?command=login");
+    }
+     ?>
         <nav class="navbar navbar-expand-lg">
             <div class="container-xl">
-                <a class="navlogo" href="index.html">EasyPeasy</a>
+                <a class="navlogo" href="?command=mainPage">EasyPeasy</a>
                 <button class=" navbutton navbar-toggler" type="button" data-bs-toggle="collapse" 
                 data-bs-target="#navbarsTop" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon">...</span>
@@ -27,20 +34,30 @@
                 <div class="collapse navbar-collapse" id="navbarsTop">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="navbutton" aria-current="page" href="index.html">Home</a>
+                            <a class="navbutton" aria-current="page" href="?command=mainPage">Home</a>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="navbutton dropdown-toggle" href="#" id="dropdown1" data-bs-toggle="dropdown" 
                             aria-expanded="false">Dashboard</a>
                             <ul class="dropdown-menu" aria-labelledby="dropdown1">
-                                <li><a class="dropdown-item" href="./saved.html">Saved Recipe</a></li>
-                                <li><a class="dropdown-item" href="./addPage.html">Add Recipe</a></li>
+                                <li><a class="dropdown-item" href="?command=saved">Saved Recipe</a></li>
+                                <li><a class="dropdown-item" href="?command=add">Add Recipe</a></li>
                                 <li><a class="dropdown-item" href="#">Daily Nutrient Intake</a></li>
                             </ul>
                         </li>
                     </ul>
-                    <a style="color: white; border-color: white;" 
-                    class="btn button-border my-2 my-sm-0" aria-current="page" href="#">Log In</a>
+                    <?php
+                    
+                    if(isset($_SESSION["name"])){
+                        echo "<h4 style='color: white;'> Hi, ".$_SESSION["name"]."! </h4>";
+                        echo "<a style='color: white; border-color: white; margin-left: 5px' 
+                        class='btn button-border my-2 my-sm-0' aria-current='page' href='?command=logout'>Log out</a>";
+                    }
+                    else{
+                        echo "<a style='color: white; border-color: white;' 
+                        class='btn button-border my-2 my-sm-0' aria-current='page' href='?command=login'>Log in</a>";
+                    }
+                    ?>
                 </div>
             </div>
         </nav>
@@ -51,9 +68,47 @@
                     <input style="width: 80%; margin: 0 auto;" class="form-control" type="text" placeholder="Search" aria-label="Search">
             </form>
         </div>
-
         <h1 style="margin-left: 5rem">Saved Recipes</h1>
-        <div class="container py-1">        
+
+        <?php
+            if(!empty($final)){
+                foreach($final as $key => $value){
+                    echo "<div class='container py-1'>";
+                    echo "<div class='card shadow mb-4'>";
+                    echo "<div class='card-body p-5'>";
+                    echo "<form action='?command=saved' method='post'>";
+                    echo "<h4 class='mb-4'>" .$key."</h4>";
+                    echo " <ul class='list-inline'>";
+                    foreach($value as $detail){
+                        echo "<li class='list-inline-item'>". $detail. "</li>";
+                    }
+                    echo "</ul>";
+                    echo "<p>";
+                    foreach($result as $res){
+                        if($res["recipeId"] == $key){
+                            $instruction = $res["description"];
+                            break;
+                        }
+                    }
+                    echo $instruction;
+                    echo "</p>";
+
+                    echo "<input type='hidden' name='deleteId' value='". $key. "'>";
+                    echo "<button type='submit' name='deleteItem' class='btn btn-outline-danger' >";
+                    echo "Delete";
+                    echo "</button>";
+                    echo "</form>";
+                    echo "</div>";
+                    echo "</div>";
+                    echo "</div>";
+
+                }
+                
+            }
+               
+
+        ?>
+        <!-- <div class="container py-1">        
             <div class="card shadow mb-4">
                 <div class="card-body p-5">
                     <h4 class="mb-4">Some Recipe</h4>
@@ -100,7 +155,7 @@
                     </ol>
                 </div>
             </div>                
-        </div>
+        </div> -->
         
         <div class="fadeshow container">
             <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
@@ -108,8 +163,8 @@
     
                 <ul class="nav col-md-4 justify-content-end">
                     <li class="nav-item"><a href="./index.html" class="nav-link px-2 text-muted">Home</a></li>
-                    <li class="nav-item"><a href="./saved.html" class="nav-link px-2 text-muted">Saved Recipe</a></li>
-                    <li class="nav-item"><a href="./addPage.html" class="nav-link px-2 text-muted">Add Recipe</a></li>
+                    <li class="nav-item"><a href="./templates/saved.html" class="nav-link px-2 text-muted">Saved Recipe</a></li>
+                    <li class="nav-item"><a href="./templates/addPage.html" class="nav-link px-2 text-muted">Add Recipe</a></li>
                     <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Daily Nutrient Intake</a></li>
                 </ul>
             </footer>

@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <link rel="stylesheet" href="styles/main.css">
 
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -14,13 +13,21 @@
         <title>Easy Peasy</title>
         <script src="jquery-3.5.1.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <link rel="stylesheet" href="styles/main.css">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" 
         integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous"> 
     </head>
     <body>
+    <!-- check for login status -->
+    <?php 
+    
+    if (!isset($_SESSION["email"])){
+      header("Location: ?command=login");
+    }
+     ?>
         <nav class="navbar navbar-expand-lg">
             <div class="container-xl">
-                <a class="navlogo" href="index.html">EasyPeasy</a>
+                <a class="navlogo" href="?command=mainPage">EasyPeasy</a>
                 <button class=" navbutton navbar-toggler" type="button" data-bs-toggle="collapse" 
                 data-bs-target="#navbarsTop" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon">...</span>
@@ -29,20 +36,31 @@
                 <div class="collapse navbar-collapse" id="navbarsTop">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="navbutton" aria-current="page" href="index.html">Home</a>
+                            <a class="navbutton" aria-current="page" href="?command=mainPage">Home</a>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="navbutton dropdown-toggle" href="#" id="dropdown1" data-bs-toggle="dropdown" 
                             aria-expanded="false">Dashboard</a>
                             <ul class="dropdown-menu" aria-labelledby="dropdown1">
-                                <li><a class="dropdown-item" href="./saved.html">Saved Recipe</a></li>
-                                <li><a class="dropdown-item" href="./addPage.html">Add Recipe</a></li>
+                                <li><a class="dropdown-item" href="?command=saved">Saved Recipe</a></li>
+                                <li><a class="dropdown-item" href="?command=add">Add Recipe</a></li>
                                 <li><a class="dropdown-item" href="#">Daily Nutrient Intake</a></li>
                             </ul>
                         </li>
                     </ul>
-                    <a style="color: white; border-color: white;" 
-                    class="btn button-border my-2 my-sm-0" aria-current="page" href="#">Log In</a>
+                    <!-- check for login status -->
+                    <?php
+                    
+                    if(isset($_SESSION["name"])){
+                        echo "<h4 style='color: white;'> Hi, ".$_SESSION["name"]."! </h4>";
+                        echo "<a style='color: white; border-color: white; margin-left: 5px' 
+                        class='btn button-border my-2 my-sm-0' aria-current='page' href='?command=logout'>Log out</a>";
+                    }
+                    else{
+                        echo "<a style='color: white; border-color: white;' 
+                        class='btn button-border my-2 my-sm-0' aria-current='page' href='?command=login'>Log in</a>";
+                    }
+                    ?>
                 </div>
             </div>
         </nav>
@@ -51,10 +69,10 @@
             New Recipes Information</h1>
 
         <div class="add container"> 
-            <form autocomplete="on">
+            <form action="?command=add" method="post" >
                 <div class="add name--section">
                     <label class="label--name" for="recipe--name">Recipe Name:</label> 
-                    <input type="text" id="recipe--name"  pattern="^[A-Za-z]+$">
+                    <input type="text" id="recipe--name"   name="recipeName">
                 </div>
 
                 <div class="add ingredient--section">
@@ -75,23 +93,18 @@
                             <tbody>
                                 <tr>
                                     <td>
-                                        <input aria-labelledby='recipe--ingredients' type="number" >
+                                        <input aria-labelledby='recipe--ingredients' type="number" name="measurement[]">
                                     </td>
                                     <td>
-                                        <select name="measurement" aria-labelledby='recipe--ingredients'>
-                                            <option value="1">tbsp</option>
-                                            <option value="2">Cup</option>
+                                        <select name="unit[]" aria-labelledby='recipe--ingredients'>
+                                            <option value="tbsp">tbsp</option>
+                                            <option value="Cup">Cup</option>
+                                            <option value="Serving">Serving</option>
                                         </select>
                                     </td>
                                     <td>
-                                        <input list="ingredients" aria-labelledby='recipe--ingredients'>
-                                        <datalist id="ingredients">
-                                            <option value="Egg">
-                                            <option value="Tomato">
-                                            <option value="Cheese">
-                                            <option value="Cabbage">
-                                            <option value="Onions">
-                                        </datalist>
+                                        <input list="ingredients" aria-labelledby='recipe--ingredients' name="item[]">
+                                        
                                     </td>
                                     <td>
                                         <button type="button" class="btn btn-danger btn-sm">Remove</button>
@@ -104,7 +117,7 @@
 
                 <div class="add instuctions--section">
                     <label class="label--name" for="recipe--instructions">Instructions:</label> 
-                    <textarea id="recipe--instructions" class="form-control" aria-label="With textarea" rows="6" >  </textarea>
+                    <textarea id="recipe--instructions" class="form-control" aria-label="With textarea" rows="6" name="description">  </textarea>
 
                 </div>
 
@@ -119,8 +132,8 @@
     
                 <ul class="nav col-md-4 justify-content-end">
                     <li class="nav-item"><a href="./index.html" class="nav-link px-2 text-muted">Home</a></li>
-                    <li class="nav-item"><a href="./saved.html" class="nav-link px-2 text-muted">Saved Recipe</a></li>
-                    <li class="nav-item"><a href="./addPage.html" class="nav-link px-2 text-muted">Add Recipe</a></li>
+                    <li class="nav-item"><a href="./templates/saved.html" class="nav-link px-2 text-muted">Saved Recipe</a></li>
+                    <li class="nav-item"><a href="./templates/addPage.html" class="nav-link px-2 text-muted">Add Recipe</a></li>
                     <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Daily Nutrient Intake</a></li>
                 </ul>
             </footer>
