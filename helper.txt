@@ -1,0 +1,3 @@
+Patrick Duong and Max Kouzel have helped us on the project during this sprint.
+Specifically, they inspire us to think how we can use hidden input to maintain state instead of always wanting to use cookie.
+Also, they helped us to debug the databse issue when we have trouble connecting. It turns out there is some sql syntax that we weren't aware of.

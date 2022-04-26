@@ -1,0 +1,2 @@
+API Calls in PHP
+    Get request: curl example: EpeasyController loadFood
