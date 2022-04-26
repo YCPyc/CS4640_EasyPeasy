@@ -16,6 +16,10 @@
         integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous"> 
     </head>
     <body>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" 
+        integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
     <!-- check for login status -->
     <?php 
     
@@ -42,7 +46,6 @@
                             <ul class="dropdown-menu" aria-labelledby="dropdown1">
                                 <li><a class="dropdown-item" href="?command=saved">Saved Recipe</a></li>
                                 <li><a class="dropdown-item" href="?command=add">Add Recipe</a></li>
-                                <li><a class="dropdown-item" href="#">Daily Nutrient Intake</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -64,20 +67,34 @@
 
         <!-- SearchBar -->
         <div class="p-5 mb-4 text-white" id="home-1">
-            <form>
-                    <input style="width: 80%; margin: 0 auto;" class="form-control" type="text" placeholder="Search" aria-label="Search">
-            </form>
+            <div id="totalCal">Total Daily Calories: </div>
+            <div id="total">0
+            </div>
+            <button style="	text-align: center" id="clearCal" class="btn btn-outline-success" onclick="clearCalorie()">Clear Calories</button>
         </div>
+
         <h1 style="margin-left: 5rem">Saved Recipes</h1>
 
         <?php
             if(!empty($final)){
+                $i = 0;
                 foreach($final as $key => $value){
                     echo "<div class='container py-1'>";
                     echo "<div class='card shadow mb-4'>";
                     echo "<div class='card-body p-5'>";
-                    echo "<form action='?command=saved' method='post'>";
                     echo "<h4 class='mb-4'>" .$key."</h4>";
+                    
+                    foreach($result as $res){
+                        if($res["recipeId"] == $key){
+                            $calories = $res["calorie"];
+                            break;
+                        }
+                    }
+                    echo "<h6>Calories: "; 
+                    echo "</h6>";
+                    echo "<p>" .$calories. "</p>";
+                    echo "<h6>Ingredients: "; 
+                    echo "</h6>";
                     echo " <ul class='list-inline'>";
                     foreach($value as $detail){
                         echo "<li class='list-inline-item'>". $detail. "</li>";
@@ -90,24 +107,43 @@
                             break;
                         }
                     }
+                    echo "<h6>Instructions: "; 
+                    echo "</h6>";
                     echo $instruction;
                     echo "</p>";
-
+                    echo " <ul class='list-inline'>";
+                    echo "<li class='list-inline-item'>";
+                    echo "<form action='?command=saved' method='post'>";
                     echo "<input type='hidden' name='deleteId' value='". $key. "'>";
                     echo "<button type='submit' name='deleteItem' class='btn btn-outline-danger' >";
                     echo "Delete";
                     echo "</button>";
                     echo "</form>";
-                    echo "</div>";
-                    echo "</div>";
-                    echo "</div>";
+                    echo "</li>";
 
+                    echo "<li class='list-inline-item'>";
+                    echo "<form action='?command=saved' method='post'>";
+                    // echo "<input type='hidden' value='".$calories."' class='calorieInput'>";
+                    echo "<button type='button' name='calorieItem' value='".$calories."' class='btn btn-outline-success calorieInput'>";
+                    echo "Add to Daily Intake";
+                    echo "</button>";
+                    echo "</form>";
+                    echo "</li>";
+
+                    echo "</ul>";
+
+                    echo "</div>";
+                    echo "</div>";
+                    echo "</div>";
                 }
+                $i += 1;
                 
             }
                
 
         ?>
+
+
         <!-- <div class="container py-1">        
             <div class="card shadow mb-4">
                 <div class="card-body p-5">
@@ -174,9 +210,47 @@
 
 
 
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" 
-        integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
 
+        <script>
+            $(document).on("click", "button.calorieInput" , function() {
+                var cal = +$(this).val() + +document.getElementById("total").innerHTML
+                document.getElementById("total").innerHTML = cal;
+            });
+            
+            function addCalorie(){
+                console.log(document.getElementById("calorieInput0").value);
+                var cal = +document.getElementById("calorieInput0").value + +document.getElementById("total").innerHTML
+                document.getElementById("total").innerHTML = cal;
+            }
+
+            function clearCalorie(){
+                document.getElementById("total").innerHTML = 0;
+
+            }
+            const myInterval = setInterval(myTimer);
+
+            function myTimer() {
+                const date = new Date();
+                // document.getElementById("time").innerHTML = date.toLocaleTimeString();
+            }
+            function scheduleReset() {
+                // get current time
+                let reset = new Date();
+
+                // update the Hours, mins, secs to the 24th hour (which is when the next day starts)
+                reset.setHours(24, 0, 0, 0);
+                // calc amount of time until restart
+                let t = reset.getTime() - Date.now();
+                setTimeout(function() {
+                    // reset variable
+                    document.getElementById("total").innerHTML = 0;
+                    // schedule the next variable reset
+                    scheduleReset();
+                }, t);
+            }
+
+            scheduleReset();
+        </script>
     </body>
 
 </html>

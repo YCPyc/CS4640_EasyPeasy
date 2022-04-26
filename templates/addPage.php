@@ -44,13 +44,14 @@
                             <ul class="dropdown-menu" aria-labelledby="dropdown1">
                                 <li><a class="dropdown-item" href="?command=saved">Saved Recipe</a></li>
                                 <li><a class="dropdown-item" href="?command=add">Add Recipe</a></li>
-                                <li><a class="dropdown-item" href="#">Daily Nutrient Intake</a></li>
                             </ul>
                         </li>
                     </ul>
                     <!-- check for login status -->
                     <?php
-                    
+                    foreach( $errorMsg as $error){
+                        echo $error;
+                     }
                     if(isset($_SESSION["name"])){
                         echo "<h4 style='color: white;'> Hi, ".$_SESSION["name"]."! </h4>";
                         echo "<a style='color: white; border-color: white; margin-left: 5px' 
@@ -120,6 +121,11 @@
                     <textarea id="recipe--instructions" class="form-control" aria-label="With textarea" rows="6" name="description">  </textarea>
 
                 </div>
+                <div class="add name--section">
+                    <label class="label--name" for="recipe--calories">Total Calories:</label> 
+                    <input type="text" id="recipe--calories" name="calories">
+                </div>
+
 
                 <button type="submit" class="btn btn-outline-success" style="margin-left: 15px;">Save</button>
             </form>      

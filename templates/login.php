@@ -29,7 +29,6 @@
                             <ul class="dropdown-menu" aria-labelledby="dropdown1">
                                 <li><a class="dropdown-item" href="?command=saved">Saved Recipe</a></li>
                                 <li><a class="dropdown-item" href="?command=add">Add Recipe</a></li>
-                                <li><a class="dropdown-item" href="#">Daily Nutrient Intake</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -40,7 +39,7 @@
         
         <div class="container" style="margin-top: 15px;">
             <div class="row col-xs-8">
-                <h1>Customzied Recipe is just one click away - Get Started</h1>
+                <h1>Customzied Recipe is just one click away - Get Started or Log Back In</h1>
                 <p> Welcome to Easy Peasy!  To get started, enter a username and password.</p>
             </div>
             <div class="row justify-content-center">
@@ -72,6 +71,9 @@
                 </div>
             </div>
         </div>
+        <script>
+            
+        </script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
     </body>
 </html>

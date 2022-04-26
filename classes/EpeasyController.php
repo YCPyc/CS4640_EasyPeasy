@@ -29,10 +29,19 @@ class EpeasyController{
             case "logout":
                 $this->logout();
                 break;
+            case "daily":
+                $this->daily();
+                break;
             default:
                 $this->mainPage();
                 break;
         }
+
+    }
+
+    public function daily(){
+        session_start();
+        include("templates/daily.php");
 
     }
 
@@ -152,14 +161,17 @@ class EpeasyController{
                     array_push($errorMsg, "<div class='alert alert-danger'> Recipe Name: Only letters and white space allowed</div>");
                 }
             }
-            //check email value
+            //check ingredient value
             if (empty($_POST["measurement"]) || empty($_POST["unit"]) || empty($_POST["item"])) {
                 array_push($errorMsg, "<div class='alert alert-danger'> Ingredient is required</div>");
             } 
-            //check passwrod value
+            //check description value
             if (empty($_POST["description"])) {
-                array_push($errorMsg, "<div class='alert alert-danger'> Password is required</div>");   
-            } 
+                array_push($errorMsg, "<div class='alert alert-danger'> Description is required</div>");   
+            }
+            if (empty($_POST["calories"])) {
+                array_push($errorMsg, "<div class='alert alert-danger'> Calories is required</div>");   
+            }  
             if(empty($errorMsg)){
                 $data = $this->db->query("select * from recipe where recipeId = ?;","s",$_POST["recipeName"]);
                 if($data === false){
@@ -181,7 +193,7 @@ class EpeasyController{
                             break;
                         }
                     }
-                    $recipeInsert = $this->db->query("insert into recipe (recipeId,userId,description) values (?,?,?);","sss",$_POST["recipeName"],$_SESSION["email"],$_POST["description"]);
+                    $recipeInsert = $this->db->query("insert into recipe (recipeId,userId,description,calorie) values (?,?,?,?);","sssi",$_POST["recipeName"],$_SESSION["email"],$_POST["description"],$_POST["calories"]);
                     if($recipeInsert == false){
                         array_push($errorMsg, "<div class='alert alert-danger'>Error inputing the recipe</div>");
                     }

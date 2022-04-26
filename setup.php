@@ -23,6 +23,7 @@ $db->query("create table recipe (
             recipeId varchar(50) not null,
             userId varchar(50) not null,
             description text not null,
+            calorie int not null,
             primary key (recipeId)
         );");
 

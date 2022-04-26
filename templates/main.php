@@ -38,7 +38,6 @@
                             <ul class="dropdown-menu" aria-labelledby="dropdown1">
                                 <li><a class="dropdown-item" href="?command=saved">Saved Recipe</a></li>
                                 <li><a class="dropdown-item" href=".?command=add">Add Recipe</a></li>
-                                <li><a class="dropdown-item" href="#">Daily Nutrient Intake</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -62,8 +61,8 @@
     
         <div class="p-5 mb-4 text-white" id="home-1">
             <div class="container py-5">
-                <h1 class="display-5 fw-bold">Find Your Recipes</h1>
-                <p >Search and Filter through all our recipes</p>
+                <h1 class="display-5 fw-bold">Count Your Calories</h1>
+                <p >Search and Filter through all our food</p>
                 <form method="post" action="?command=mainPage">
                     <div class="input-group mb-3">
                         <input type="text" class="form-control" name="search" placeholder="Any food item that you want to search about" aria-label="Search" aria-describedby="button-addon2">
@@ -72,6 +71,42 @@
                 </form>
             </div>
         </div>
+
+        <!-- <script>
+            function getSearch() {
+                // instantiate the object
+                var ajax = new XMLHttpRequest();
+                // open the request
+                ajax.open("GET", "?command=get_food", true);
+                // send the request
+                ajax.send(null);
+            
+                // What happens if the load succeeds
+                ajax.addEventListener("load", function() {
+                    // set question
+                    if (this.status == 200) { // worked 
+                        result = this.response;
+                        
+                        console.log(result[0]["food_name"]);
+                        displayFood();
+                    }
+                });
+            
+                // What happens on error
+                ajax.addEventListener("error", function() {
+                    document.getElementById("message").innerHTML = 
+                        "<div class='alert alert-danger'>An Error Occurred</div>";
+                });
+            }
+
+            function displayFood(){
+
+            }
+            getSearch();
+            // Method to display a question
+        </script> -->
+
+
         <!-- loop through databse to check for saved recipes -->
         <?php
         if(!empty($result)){
@@ -93,20 +128,21 @@
             echo "";
         }
         ?>
+        <script>
+            $('.save_button').click(function() { alert('clicked'); });
+        </script>
 
 
         <section class="fadeshow" style="padding-left: 7rem; padding-bottom: 5rem;" >
             <div class="col-4">
                 <h3>Explore</h3>
             </div>
-            <a href="./index.html" aria-label="Explore Page Carousel of Food Pictures">
                 <div class="col-8" id="carousel">
                     <div class="item"></div>
                     <div class="item"></div>
                     <div class="item"></div>
                     <div class="item"></div>
                 </div>
-            </a>
 
             
         </section>

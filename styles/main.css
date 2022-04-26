@@ -107,6 +107,7 @@ a.navlogo {
 
 #home-1 {
 	background-image: linear-gradient(#2BC8A2, white);
+	text-align: center;
 }
 
 #saved-1 {
@@ -118,6 +119,21 @@ a.navlogo {
 #searchbar {
 	margin-top: 0%;
 	vertical-align: top;
+
+}
+
+#totalCal {
+	text-align: center;
+	font-size: 300%;
+}
+
+#total {
+	text-align: center;
+	font-size: 200%;
+}
+
+#clearCal{
+	text-align: center;
 
 }
 
@@ -133,6 +149,15 @@ a.navlogo {
 .label--name{
 	font-weight: bold;
 }
+
+.save_button {
+    background: url('http://imgur.com/I0EwG.png') transparent;
+    height: 48px;
+    width: 45px;
+    border: none;
+}
+
+
 
 /* For Non Mobile */
 @media only screen and (min-width: 768px) {
