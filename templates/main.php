@@ -125,7 +125,8 @@
                     },
                     success: function (data) {
                         searchRes = data['branded'];
-                        console.log(searchRes);  
+                        console.log(searchRes);
+                        $('.searchResult').empty();  
                         $.each(searchRes, function(index, value) {
                             var myString = `
                             <div class='container py-1'>

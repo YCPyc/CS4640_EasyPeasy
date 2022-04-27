@@ -20,7 +20,6 @@
     <body>
     <!-- check for login status -->
     <?php 
-    session_start();
     if (!isset($_SESSION["email"])){
       header("Location: ?command=login");
     }
@@ -49,7 +48,6 @@
                     </ul>
                     <!-- check for login status -->
                     <?php
-                    session_start();
                     if(isset($_SESSION["name"])){
                         echo "<h4 style='color: white;'> Hi, ".$_SESSION["name"]."! </h4>";
                         echo "<a style='color: white; border-color: white; margin-left: 5px' 

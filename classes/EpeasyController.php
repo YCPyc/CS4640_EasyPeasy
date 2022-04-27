@@ -52,7 +52,7 @@ class EpeasyController{
                 session_start();
                 //check name value
                 if (empty($_POST["name"])) {
-                    // array_push($errorMsg, "<div class='alert alert-danger'> Name is required</div>");
+                    array_push($errorMsg, "<div class='alert alert-danger'> Name is required</div>");
                 } else {
                     // check if name only contains letters and whitespace
                     if (!preg_match("/^[a-zA-Z-' ]*$/",$_POST["name"])) {
@@ -61,7 +61,7 @@ class EpeasyController{
                 }
                 //check email value
                 if (empty($_POST["email"])) {
-                    // array_push($errorMsg, "<div class='alert alert-danger'> Email is required</div>");
+                    array_push($errorMsg, "<div class='alert alert-danger'> Email is required</div>");
                 } else {
                     if (!filter_var($_POST["email"],FILTER_VALIDATE_EMAIL)) {
                         array_push($errorMsg, "<div class='alert alert-danger'> Email: Invalid email format</div>");
@@ -69,7 +69,7 @@ class EpeasyController{
                 }
                 //check passwrod value
                 if (empty($_POST["password"])) {
-                    // array_push($errorMsg, "<div class='alert alert-danger'> Password is required</div>");   
+                    array_push($errorMsg, "<div class='alert alert-danger'> Password is required</div>");   
                 } else {
                     if (!preg_match("/(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/",$_POST["password"])) {
                         array_push($errorMsg, "<div class='alert alert-danger'> Password: Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters</div>");

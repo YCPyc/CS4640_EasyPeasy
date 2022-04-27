@@ -14,11 +14,16 @@
         <title>Easy Peasy</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" 
         integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous"> 
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
     </head>
     <body>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" 
-        integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+
+
+
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"
+        integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script> -->
 
     <!-- check for login status -->
     <?php 
@@ -45,12 +50,12 @@
                             aria-expanded="false">Dashboard</a>
                             <ul class="dropdown-menu" aria-labelledby="dropdown1">
                                 <li><a class="dropdown-item" href="?command=saved">Saved Recipe</a></li>
-                                <li><a class="dropdown-item" href="?command=add">Add Recipe</a></li>
+                                <li><a class="dropdown-item" href=".?command=add">Add Recipe</a></li>
                             </ul>
                         </li>
                     </ul>
+                    <!-- check for login status -->
                     <?php
-                    
                     if(isset($_SESSION["name"])){
                         echo "<h4 style='color: white;'> Hi, ".$_SESSION["name"]."! </h4>";
                         echo "<a style='color: white; border-color: white; margin-left: 5px' 
@@ -61,10 +66,10 @@
                         class='btn button-border my-2 my-sm-0' aria-current='page' href='?command=login'>Log in</a>";
                     }
                     ?>
+                    
                 </div>
             </div>
         </nav>
-
         <!-- SearchBar -->
         <div class="p-5 mb-4 text-white" id="home-1">
             <div id="totalCal">Total Daily Calories: </div>
