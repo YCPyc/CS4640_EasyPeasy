@@ -20,7 +20,7 @@
     <body>
     <!-- check for login status -->
     <?php 
-    
+    session_start();
     if (!isset($_SESSION["email"])){
       header("Location: ?command=login");
     }
@@ -49,9 +49,7 @@
                     </ul>
                     <!-- check for login status -->
                     <?php
-                    foreach( $errorMsg as $error){
-                        echo $error;
-                     }
+                    session_start();
                     if(isset($_SESSION["name"])){
                         echo "<h4 style='color: white;'> Hi, ".$_SESSION["name"]."! </h4>";
                         echo "<a style='color: white; border-color: white; margin-left: 5px' 
@@ -108,7 +106,7 @@
                                         
                                     </td>
                                     <td>
-                                        <button type="button" class="btn btn-danger btn-sm">Remove</button>
+                                        <button type="button" id="remove-more" class="btn btn-danger btn-sm">Remove</button>
                                     </td>
                                 </tr>
                             </tbody>
@@ -145,26 +143,46 @@
             </footer>
         </div>
 
-        <!-- JavaScript for adding new ingredients to recipe -->
+        
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" 
+        integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
         <script>
-            $("#insert-more").click(function () {
-                $("#mytable").each(function () {
+        // JQuery for adding new ingredients to recipe
+        var savedtds;
+            $("#insert-more").click(() => {
+                console.log($('tbody tr').length);
+                //if all the rows are deleted
+                if ($('tbody tr').length == 0) {
+                    console.log(savedtds);
+                    console.log(1);
+                    $('tbody').append(savedtds);
+                }
+                else{
                     var tds = '<tr>';
-                    jQuery.each($('tr:last td', this), function () {
-                        tds += '<td>' + $(this).html() + '</td>';
-                    });
+                    $("#mytable").each(function () {
+                        jQuery.each($('tr:last td', this), function () {
+                            tds += '<td>' + $(this).html() + '</td>';
+                        });
                     tds += '</tr>';
                     if ($('tbody', this).length > 0) {
                         $('tbody', this).append(tds);
                     } else {
-                        $(this).append(tds);
+                        $('tbody').append(tds);
                     }
-                });
+                    });
+                }
+            });
+
+            $("#mytable").on("click", "#remove-more", function() {
+                savedtds = $(this).closest("tr");
+                $(this).closest("tr").remove();
+               
+                console.log($('tbody tr').length);
+                
             });
         </script>
 
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" 
-        integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
+        
 
     </body>
 

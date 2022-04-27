@@ -1,4 +1,4 @@
-<!-- CS Server: https://cs4640.cs.virginia.edu/yp9ar/Easypeasy/ -->
+<!-- CS Server: https://cs4640.cs.virginia.edu/jp6ax/Easypeasy/ -->
 <!-- Page by Yancheng Pan and Jun Song Park -->
 <?php
 // error_reporting(E_ALL);
